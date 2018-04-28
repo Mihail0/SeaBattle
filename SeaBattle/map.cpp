@@ -9,5 +9,5 @@ Map::Map() {
 }
 
 Map::~Map() {
-
+	delete[] container;
 }

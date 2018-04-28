@@ -1,6 +1,6 @@
 #include "line.h"
 
-ui8 Line::operator[](const ui8 &index) const {
+ui8& Line::operator[](const ui8 &index) {
 	return elements[index];
 }
 

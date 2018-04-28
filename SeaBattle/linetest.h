@@ -13,4 +13,8 @@ public:
 	virtual ~LineTest();
 };
 
+TEST_F(LineTest, LineCreationTest) {
+	ASSERT_TRUE(line != NULL);
+}
+
 #endif

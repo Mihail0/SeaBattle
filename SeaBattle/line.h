@@ -8,7 +8,7 @@ private:
 protected:
 	ui8* elements;
 public:
-	ui8 operator[](const ui8 &) const;
+	ui8& operator[](const ui8 &);
 	Line();
 	virtual ~Line();
 };

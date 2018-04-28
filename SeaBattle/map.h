@@ -9,7 +9,7 @@ private:
 protected:
 	Line* container;
 public:
-	Line& operator[](const ui8 &) const;
+	Line& operator[](const ui8 &);
 	Map();
 	virtual ~Map();
 };

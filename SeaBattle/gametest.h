@@ -2,6 +2,7 @@
 #define __GAMETEST
 
 #include "defs.h"
+#include "game.h"
 
 class GameTest :
 	public testing::Test {

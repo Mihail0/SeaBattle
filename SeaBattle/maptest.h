@@ -22,7 +22,7 @@ TEST_F(MapTest, MapInitializationTest) {
 	ui8 expected = water;
 	for (ui8 i = 0; i < MAPSIZE; i++) {
 		for (ui8 j = 0; j < MAPSIZE; j++) {
-			ASSERT_EQ(expected, map[i][j]);
+			ASSERT_EQ(expected, (*map)[i][j]);
 		}
 	}
 }

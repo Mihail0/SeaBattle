@@ -2,6 +2,7 @@
 #define __LINETEST
 
 #include "defs.h"
+#include "line.h"
 
 class LineTest :
 	public testing::Test {

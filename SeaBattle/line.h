@@ -6,7 +6,9 @@
 class Line {
 private:
 protected:
+	ui8* elements;
 public:
+	ui8 operator[](const ui8 &) const;
 	Line();
 	virtual ~Line();
 };

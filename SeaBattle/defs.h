@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-enum {
+enum States {
 	water,
 	bomb,
 	ship,

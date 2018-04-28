@@ -11,5 +11,5 @@ Line::Line() {
 }
 
 Line::~Line() {
-
+	delete[] elements;
 }

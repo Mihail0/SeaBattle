@@ -1,6 +1,8 @@
 #ifndef __GAME
 #define __GAME
 
+#include "defs.h"
+
 class Game {
 private:
 protected:

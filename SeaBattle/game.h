@@ -9,6 +9,6 @@ protected:
 public:
 	Game();
 	virtual ~Game();
-}
+};
 
 #endif

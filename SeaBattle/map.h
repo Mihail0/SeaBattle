@@ -2,6 +2,7 @@
 #define __MAP
 
 #include "defs.h"
+#include "line.h"
 
 class Map {
 private:

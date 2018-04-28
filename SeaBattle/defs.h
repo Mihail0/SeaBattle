@@ -3,4 +3,11 @@
 
 #include <gtest/gtest.h>
 
+enum {
+	water,
+	bomb,
+	ship,
+	crash
+};
+
 #endif

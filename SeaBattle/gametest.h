@@ -13,4 +13,8 @@ public:
 	virtual ~GameTest();
 };
 
+TEST_F(GameTest, GameCreationTest) {
+	ASSERT_NE(NULL, game);
+}
+
 #endif

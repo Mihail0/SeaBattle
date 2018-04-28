@@ -14,4 +14,8 @@ public:
 	virtual ~MapTest();
 };
 
+TEST_F(MapTest, MapCreationTest) {
+	ASSERT_TRUE(map != NULL);
+}
+
 #endif

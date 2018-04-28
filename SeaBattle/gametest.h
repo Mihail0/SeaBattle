@@ -15,7 +15,7 @@ public:
 };
 
 TEST_F(GameTest, GameCreationTest) {
-	ASSERT_NE(NULL, game);
+	ASSERT_TRUE(game != NULL);
 }
 
 #endif

@@ -5,7 +5,12 @@
 
 class ShipTest :
 	public testing::Test {
-
+private:
+protected:
+	Ship* ship;
+public:
+	ShipTest();
+	virtual ~ShipTest();
 };
 
 #endif

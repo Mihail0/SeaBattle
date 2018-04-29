@@ -37,4 +37,10 @@ TEST_F(LineTest, LineFireAt1Test) {
 	EXPECT_EQ(expected, (*line)[1]);
 }
 
+TEST_F(LineTest, LineFireAt2Test) {
+	ui8 expected = bomb;
+	line->fire(2);
+	EXPECT_EQ(expected, (*line)[2]);
+}
+
 #endif

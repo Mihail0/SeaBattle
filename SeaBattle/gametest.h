@@ -18,4 +18,8 @@ TEST_F(GameTest, GameCreationTest) {
 	ASSERT_TRUE(game != NULL);
 }
 
+TEST_F(GameTest, GameMapInitTest) {
+	ASSERT_TRUE(game->map != NULL);
+}
+
 #endif

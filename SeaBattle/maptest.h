@@ -41,4 +41,19 @@ TEST_F(MapTest, MapFireAtX0Test) {
 	}
 }
 
+TEST_F(MapTest, MapFireAtXYTest) {
+	ui8 expected = bomb;
+	for (ui8 i = 0; i < 100; i++) {
+		ui8 rndX = Random(100);
+		ui8 rndY = Random(100);
+		if (rndX > 9 || rndY > 9) {
+			EXPECT_THROW(map->fire(rndX, rndY), std::out_of_range);
+		}
+		else {
+			map->fire(rndX, rndY);
+			EXPECT_EQ(expected, (*map)[rndX][rndY]);
+		}
+	}
+}
+
 #endif

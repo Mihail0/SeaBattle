@@ -6,6 +6,8 @@
 class Ship {
 private:
 protected:
+	ui8 x, y;
+	ui8* count;
 public:
 	Ship();
 	virtual ~Ship();

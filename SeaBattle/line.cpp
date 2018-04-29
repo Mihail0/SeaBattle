@@ -1,8 +1,12 @@
 #include "line.h"
 
+/**
+* Fired at the target cell of line
+* @param index - index of the target
+* @note index should be less than the mapsize
+*/
 void Line::fire(const ui8 &index) {
-	//todo method is not complete
-	if (index < 3) {
+	if (index < MAPSIZE) {
 		elements[index] = bomb;
 	}
 	else {

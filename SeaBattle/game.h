@@ -8,8 +8,8 @@ class Game {
 	friend class GameTest;
 private:
 protected:
-	Map* map;
 public:
+	Map* map;
 	Game();
 	virtual ~Game();
 };

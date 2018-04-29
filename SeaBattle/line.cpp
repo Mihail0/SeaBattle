@@ -2,7 +2,7 @@
 
 void Line::fire(const ui8 &index) {
 	//todo method is not complete
-	if (index < 2) {
+	if (index < 3) {
 		elements[index] = bomb;
 	}
 	else {

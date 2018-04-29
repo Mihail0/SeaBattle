@@ -28,18 +28,18 @@ TEST_F(LineTest, LineInitializationTest) {
 TEST_F(LineTest, LineFireAtXTest) {
 	ui8 expected = bomb;
 	for (ui8 i = 0; i < 100; i++) {
-		ui8 rand = Random(100);
-		if (rand > 9) {
+		ui8 rnd = Random(100);
+		if (rnd > 9) {
 			try {
-				line->fire(rand);
+				line->fire(rnd);
 			}
 			catch (ui8 exc) {
 				EXPECT_EQ(0, exc);
 			}
 		}
 		else {
-			line->fire(rand);
-			EXPECT_EQ(expected, (*line)[rand]);
+			line->fire(rnd);
+			EXPECT_EQ(expected, (*line)[rnd]);
 		}
 	}
 }

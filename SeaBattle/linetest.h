@@ -25,4 +25,14 @@ TEST_F(LineTest, LineInitializationTest) {
 	}
 }
 
+TEST_F(LineTest, LineFireAt0Test) {
+	ui8 expected = bomb;
+	EXPECT_EQ(expected, (*line)[0]);
+}
+
+TEST_F(LineTest, LineFireAt1Test) {
+	ui8 expected = bomb;
+	EXPECT_EQ(expected, (*line)[1]);
+}
+
 #endif

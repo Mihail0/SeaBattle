@@ -2,6 +2,7 @@
 #define __SHIPTEST
 
 #include "defs.h"
+#include "ship.h"
 
 class ShipTest :
 	public testing::Test {

@@ -4,6 +4,7 @@
 #include "defs.h"
 
 class Ship {
+	friend class ShipTest;
 private:
 protected:
 	ui8 x, y;

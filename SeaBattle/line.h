@@ -8,6 +8,7 @@ private:
 protected:
 	ui8* elements;
 public:
+	virtual void fire(const ui8 &);
 	ui8& operator[](const ui8 &);
 	Line();
 	virtual ~Line();

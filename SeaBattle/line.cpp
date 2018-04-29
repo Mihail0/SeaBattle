@@ -1,5 +1,15 @@
 #include "line.h"
 
+void Line::fire(const ui8 &index) {
+	//todo method is not complete
+	if (index < 2) {
+		elements[index] = bomb;
+	}
+	else {
+		throw 0;
+	}
+}
+
 ui8& Line::operator[](const ui8 &index) {
 	return elements[index];
 }

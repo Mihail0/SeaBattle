@@ -14,4 +14,8 @@ public:
 	virtual ~ShipCreatorTest();
 };
 
+TEST_F(ShipCreatorTest, ShipCreatorCreationTest) {
+	ASSERT_TRUE(shipCreator != NULL);
+}
+
 #endif

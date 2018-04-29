@@ -27,4 +27,16 @@ TEST_F(MapTest, MapInitializationTest) {
 	}
 }
 
+TEST_F(MapTest, MapFireAt00TEST) {
+	ui8 expected = bomb;
+	map->fire(0, 0);
+	EXPECT_EQ(expected, (*map)[0][0]);
+}
+
+TEST_F(MapTest, MapFireAt01TEST) {
+	ui8 expected = bomb;
+	map->fire(0, 1);
+	EXPECT_EQ(expected, (*map)[0][1]);
+}
+
 #endif

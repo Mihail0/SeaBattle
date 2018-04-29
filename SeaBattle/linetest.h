@@ -25,22 +25,23 @@ TEST_F(LineTest, LineInitializationTest) {
 	}
 }
 
-TEST_F(LineTest, LineFireAt0Test) {
+TEST_F(LineTest, LineFireAtXTest) {
 	ui8 expected = bomb;
-	line->fire(0);
-	EXPECT_EQ(expected, (*line)[0]);
-}
-
-TEST_F(LineTest, LineFireAt1Test) {
-	ui8 expected = bomb;
-	line->fire(1);
-	EXPECT_EQ(expected, (*line)[1]);
-}
-
-TEST_F(LineTest, LineFireAt2Test) {
-	ui8 expected = bomb;
-	line->fire(2);
-	EXPECT_EQ(expected, (*line)[2]);
+	for (ui8 i = 0; i < 100; i++) {
+		ui8 rand = Random(100);
+		if (rand > 9) {
+			try {
+				line->fire(rand);
+			}
+			catch (ui8 exc) {
+				EXPECT_EQ(0, exc);
+			}
+		}
+		else {
+			line->fire(rand);
+			EXPECT_EQ(expected, (*line)[rand]);
+		}
+	}
 }
 
 #endif

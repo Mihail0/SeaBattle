@@ -4,7 +4,11 @@
 #include "defs.h"
 
 class ShipCreator {
-
+private:
+protected:
+public:
+	ShipCreator();
+	virtual ~ShipCreator();
 };
 
 #endif

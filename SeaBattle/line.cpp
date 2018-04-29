@@ -10,7 +10,7 @@ void Line::fire(const ui8 &index) {
 		elements[index] = bomb;
 	}
 	else {
-		throw 0;
+		throw std::out_of_range ("Array index is out of range");
 	}
 }
 

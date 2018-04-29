@@ -2,6 +2,7 @@
 #define __GAME
 
 #include "defs.h"
+#include "map.h"
 
 class Game {
 	friend class GameTest;

@@ -39,4 +39,10 @@ TEST_F(MapTest, MapFireAt01TEST) {
 	EXPECT_EQ(expected, (*map)[0][1]);
 }
 
+TEST_F(MapTest, MapFireAt11TEST) {
+	ui8 expected = bomb;
+	map->fire(1, 1);
+	EXPECT_EQ(expected, (*map)[1][1]);
+}
+
 #endif

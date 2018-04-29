@@ -27,22 +27,18 @@ TEST_F(MapTest, MapInitializationTest) {
 	}
 }
 
-TEST_F(MapTest, MapFireAt00TEST) {
+TEST_F(MapTest, MapFireAtX0Test) {
 	ui8 expected = bomb;
-	map->fire(0, 0);
-	EXPECT_EQ(expected, (*map)[0][0]);
-}
-
-TEST_F(MapTest, MapFireAt01TEST) {
-	ui8 expected = bomb;
-	map->fire(0, 1);
-	EXPECT_EQ(expected, (*map)[0][1]);
-}
-
-TEST_F(MapTest, MapFireAt11TEST) {
-	ui8 expected = bomb;
-	map->fire(1, 1);
-	EXPECT_EQ(expected, (*map)[1][1]);
+	for (ui8 i = 0; i < 100; i++) {
+		ui8 rnd = Random(100);
+		if (rnd > 9) {
+			EXPECT_THROW(map->fire(rnd, 0), std::out_of_range);
+		}
+		else {
+			map->fire(rnd, 0);
+			EXPECT_EQ(expected, (*map)[rnd][0]);
+		}
+	}
 }
 
 #endif

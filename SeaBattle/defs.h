@@ -19,4 +19,9 @@ enum States {
 	crash
 };
 
+enum Directions {
+	horizontal,
+	vertical
+};
+
 #endif

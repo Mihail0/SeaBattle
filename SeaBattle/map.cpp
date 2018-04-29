@@ -2,8 +2,8 @@
 
 void Map::fire(const ui8 &x, const ui8 &y) {
 	//todo method is not complete
-	if (y < 2) {
-		container[x][y] = bomb;
+	if (x < 10) {
+		container[x][0] = bomb;
 	}
 	else {
 		throw std::out_of_range("Array index is out of range");

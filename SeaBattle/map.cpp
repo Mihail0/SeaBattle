@@ -15,6 +15,17 @@ void Map::fire(const ui8 &x, const ui8 &y) {
 	}
 }
 
+bool Map::operator==(const Map &map) const {
+	for (ui8 i = 0; i < MAPSIZE; i++) {
+		if (container[i] != map.container[i]) return false;
+	}
+	return true;
+}
+
+bool Map::operator!=(const Map &map) const {
+	return !operator==(map);
+}
+
 Line& Map::operator[](const ui8 &index) {
 	return container[index];
 }

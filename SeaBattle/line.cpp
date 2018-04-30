@@ -14,6 +14,17 @@ void Line::fire(const ui8 &index) {
 	}
 }
 
+bool Line::operator==(const Line &line) const {
+	for (ui8 i = 0; i < MAPSIZE; i++) {
+		if (elements[i] != line.elements[i]) return false;
+	}
+	return true;
+}
+
+bool Line::operator!=(const Line &line) const {
+	return !operator==(line);
+}
+
 ui8& Line::operator[](const ui8 &index) {
 	return elements[index];
 }

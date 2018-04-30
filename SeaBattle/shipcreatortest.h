@@ -21,29 +21,40 @@ TEST_F(ShipCreatorTest, ShipCreatorCreationTest) {
 }
 
 TEST_F(ShipCreatorTest, ShipCreatorCreateTest) {
-	//Expected variables
-	Map* expectedMap = new Map();
-	Ship** expectedShips = new Ship*[1];
-	expectedShips[0] = new Ship(0, 0);
-	
-	//Initialization
-	(*expectedMap)[0][0] = ship;
+	for (ui8 i = 0; i < 100; i++) {
+		//Random length of ship
+		ui8 rndLength = Random(100);
 
-	//Actual variables
-	Map* actualMap = new Map();
-	Ship** actualShips = shipCreator->create(actualMap, horizontal, 0, 0, 1);
+		//Initialize actual variables
+		Map* actualMap = new Map();
+		Ship** actualShips = shipCreator->create(actualMap, horizontal, 0, 0, rndLength);
 
-	//Comparison
-	EXPECT_EQ(*expectedMap, *actualMap);
-	EXPECT_EQ((*expectedShips)[0], (*actualShips)[0]);
+		//Initialize expected variables
+		Map* expectedMap = new Map();
+		Ship** expectedShips = new Ship*[rndLength];
+		ui8* counter = new ui8();
+		*counter = rndLength;
+		for (ui8 j = 0; j < rndLength; j++) {
+			expectedShips[j] = new Ship(j, 0, counter);
+			(*expectedMap)[j][0] = ship;
+		}
 
-	//Final cleansing
-	delete actualShips[0];
-	delete[] actualShips;
-	delete actualMap;
-	delete expectedShips[0];
-	delete[] expectedShips;
-	delete expectedMap;
+		//Comparison
+		EXPECT_EQ(*expectedMap, *actualMap);
+		for (ui8 j = 0; j < rndLength; j++) {
+			EXPECT_EQ((*expectedShips)[j], (*actualShips)[j]);
+		}
+
+		//Final cleansing
+		for (ui8 j = 0; j < rndLength; j++) {
+			delete actualShips[j];
+			delete expectedShips[j];
+		}
+		delete[] actualShips;
+		delete[] expectedShips;
+		delete actualMap;
+		delete expectedMap;
+	}
 }
 
 #endif

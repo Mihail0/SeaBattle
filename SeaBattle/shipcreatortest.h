@@ -49,7 +49,7 @@ TEST_F(ShipCreatorTest, ShipCreatorCreateTest) {
 		//Comparison
 		EXPECT_EQ(*expectedMap, *actualMap);
 		for (ui8 j = 0; j < rndLength; j++) {
-			EXPECT_EQ((*expectedShips)[j], (*actualShips)[j]);
+			EXPECT_EQ((*expectedShips[j]), (*actualShips[j]));
 		}
 
 		//Final cleansing

@@ -34,8 +34,8 @@ TEST_F(ShipCreatorTest, ShipCreatorCreateTest) {
 	Ship** actualShips = shipCreator->create(actualMap, horizontal, 0, 0, 1);
 
 	//Comparison
-	EXPECT_EQ(expectedMap, actualMap);
-	EXPECT_EQ(expectedShips[0], actualShips[0]);
+	EXPECT_EQ(*expectedMap, *actualMap);
+	EXPECT_EQ((*expectedShips)[0], (*actualShips)[0]);
 
 	//Final cleansing
 	delete actualShips[0];

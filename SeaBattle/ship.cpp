@@ -21,6 +21,10 @@ Ship::Ship(const ui8 &x, const ui8 &y) : Ship() {
 	//todo this constructor is not complete 
 }
 
+Ship::Ship(const ui8 &x, const ui8 &y, ui8* counter) : Ship(x, y) {
+	count = counter;
+}
+
 Ship::~Ship() {
 	if (count) {
 		(*count)--;

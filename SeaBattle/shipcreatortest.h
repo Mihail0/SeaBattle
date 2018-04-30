@@ -27,6 +27,13 @@ TEST_F(ShipCreatorTest, ShipCreatorCreateTest) {
 
 		//Initialize actual variables
 		Map* actualMap = new Map();
+
+		if (!(rndLength > 0 && rndLength <= MAPSIZE)) {
+			EXPECT_THROW(shipCreator->create(actualMap, horizontal, 0, 0, rndLength), std::out_of_range);
+			delete actualMap;
+			continue;
+		}
+
 		Ship** actualShips = shipCreator->create(actualMap, horizontal, 0, 0, rndLength);
 
 		//Initialize expected variables

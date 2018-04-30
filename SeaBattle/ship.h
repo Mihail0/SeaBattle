@@ -15,6 +15,7 @@ public:
 	bool operator!=(const Ship &) const;
 	Ship();
 	Ship(const ui8 &, const ui8 &);
+	Ship(const ui8 &, const ui8 &, ui8*);
 	virtual ~Ship();
 };
 

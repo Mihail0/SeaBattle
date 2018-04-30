@@ -19,6 +19,7 @@ Ship::Ship() {
 
 Ship::Ship(const ui8 &X, const ui8 &Y) : Ship() {
 	//todo this constructor is not complete 
+	x = X;
 }
 
 Ship::Ship(const ui8 &X, const ui8 &Y, ui8* counter) : Ship(X, Y) {

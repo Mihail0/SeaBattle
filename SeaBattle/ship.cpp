@@ -3,7 +3,7 @@
 bool Ship::operator==(const Ship &ship) const {
 	if (x != ship.x) return false;
 	if (y != ship.y) return false;
-	if (count != ship.count) return false;
+	if (*count != *(ship.count)) return false;
 	return true;
 }
 

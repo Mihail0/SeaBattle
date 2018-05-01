@@ -9,8 +9,8 @@ Ship** ShipCreator::create(Map* &map, const ui8 &direction, const ui8 &x, const 
 	}
 	ui8* counter = new ui8();
 	*counter = length;
-	for (ui8 i = 0; i < length; i++) {
-		if (i >= MAPSIZE) {
+	for (ui8 i = 0, X = x, Y = y; i < length; i++) {
+		if (X >= MAPSIZE || Y >= MAPSIZE) {
 			for (ui8 j = 0; j < length; j++) {
 				delete ships[j];
 			}
@@ -18,14 +18,9 @@ Ship** ShipCreator::create(Map* &map, const ui8 &direction, const ui8 &x, const 
 			if (counter) delete counter;
 			throw std::out_of_range("Array index is out of range");
 		}
-		if (direction == horizontal) {
-			ships[i] = new Ship(i, 0, counter);
-			(*map)[i][0] = ship;
-		}
-		else {
-			ships[i] = new Ship(0, i, counter);
-			(*map)[0][i] = ship;
-		}
+		ships[i] = new Ship(X, Y, counter);
+		(*map)[X][Y] = ship;
+		direction == horizontal ? X++ : Y++;
 	}
 	return ships;
 }

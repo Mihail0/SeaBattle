@@ -32,8 +32,8 @@ TEST_F(ShipCreatorTest, ShipCreatorCreateTest) {
 
 		bool cond = false;
 		rndDirection == horizontal ? 
-			cond = (rndX + rndLength <= MAPSIZE) && (rndY <= MAPSIZE) : 
-			cond = (rndY + rndLength <= MAPSIZE) && (rndX <= MAPSIZE) ;
+			cond = (rndX + (rndLength - 1) < MAPSIZE) && (rndY < MAPSIZE) : 
+			cond = (rndY + (rndLength - 1) < MAPSIZE) && (rndX < MAPSIZE) ;
 		if (!(rndLength > 0 && cond)) {
 			EXPECT_THROW(shipCreator->create(actualMap, rndDirection, rndX, rndY, rndLength), std::out_of_range);
 			delete actualMap;

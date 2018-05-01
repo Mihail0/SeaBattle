@@ -22,9 +22,9 @@ TEST_F(ShipCreatorTest, ShipCreatorCreationTest) {
 
 TEST_F(ShipCreatorTest, ShipCreatorCreateTest) {
 	for (ui8 i = 0; i < 100; i++) {
-		ui8 rndLength = Random(100);	//Random length of ship
-		ui8 rndX = Random(100);			//Random x-coordinate
-		ui8 rndY = Random(100);			//Random y-coordinate
+		ui8 rndLength = Random(20);		//Random length of ship
+		ui8 rndX = Random(20);			//Random x-coordinate
+		ui8 rndY = Random(20);			//Random y-coordinate
 		ui8 rndDirection = Random(2);	//Random direction
 
 		//Initialize actual variables

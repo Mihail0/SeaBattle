@@ -23,18 +23,24 @@ TEST_F(ShipCreatorTest, ShipCreatorCreationTest) {
 TEST_F(ShipCreatorTest, ShipCreatorCreateTest) {
 	for (ui8 i = 0; i < 100; i++) {
 		ui8 rndLength = Random(100);	//Random length of ship
+		ui8 rndX = Random(100);			//Random x-coordinate
+		ui8 rndY = Random(100);			//Random y-coordinate
 		ui8 rndDirection = Random(2);	//Random direction
 
 		//Initialize actual variables
 		Map* actualMap = new Map();
 
-		if (!(rndLength > 0 && rndLength <= MAPSIZE)) {
-			EXPECT_THROW(shipCreator->create(actualMap, rndDirection, 0, 0, rndLength), std::out_of_range);
+		bool cond = false;
+		rndDirection == horizontal ? 
+			cond = rndX + rndLength <= MAPSIZE : 
+			cond = rndY + rndLength <= MAPSIZE ;
+		if (!(rndLength > 0 && cond)) {
+			EXPECT_THROW(shipCreator->create(actualMap, rndDirection, rndX, rndY, rndLength), std::out_of_range);
 			delete actualMap;
 			continue;
 		}
 
-		Ship** actualShips = shipCreator->create(actualMap, rndDirection, 0, 0, rndLength);
+		Ship** actualShips = shipCreator->create(actualMap, rndDirection, rndX, rndY, rndLength);
 
 		//Initialize expected variables
 		Map* expectedMap = new Map();
@@ -43,12 +49,12 @@ TEST_F(ShipCreatorTest, ShipCreatorCreateTest) {
 		*counter = rndLength;
 		for (ui8 j = 0; j < rndLength; j++) {
 			if (rndDirection == horizontal) {
-				expectedShips[j] = new Ship(j, 0, counter);
-				(*expectedMap)[j][0] = ship;
+				expectedShips[j] = new Ship(rndX + j, rndY, counter);
+				(*expectedMap)[rndX + j][rndY] = ship;
 			}
 			else {
-				expectedShips[j] = new Ship(0, j, counter);
-				(*expectedMap)[0][j] = ship;
+				expectedShips[j] = new Ship(rndX, rndY + j, counter);
+				(*expectedMap)[rndX][rndY + j] = ship;
 			}
 		}
 

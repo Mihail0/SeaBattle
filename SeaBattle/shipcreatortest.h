@@ -76,4 +76,50 @@ TEST_F(ShipCreatorTest, ShipCreatorCreateTest) {
 	}
 }
 
+TEST_F(ShipCreatorTest, ShipCreatorCreate2Test) {
+	for (ui8 i = 0; i < 100; i++) {
+		Map* map = new Map();
+		Ship*** ships = new Ship**[2];
+		ui8 rndLen[2];
+		for (ui8 j = 0; j < 2; j++) {
+			ui8 rndX = Random(10);
+			ui8 rndY = Random(10);
+			ui8 rndDir = Random(2);
+			rndDir == horizontal ?
+				rndLen[j] = 1 + Random(10 - rndX) :
+				rndLen[j] = 1 + Random(10 - rndY) ;
+			bool error = false;
+			for (ui8 k = 0, X = rndX, Y = rndY; (k < rndLen[j]) && !error; k++) {
+				ui8 n = 0; if (X) n = X - 1;
+				ui8 m = 0; if (Y) m = Y - 1;
+				ui8 p = X + 1; if (p > (MAPSIZE - 1)) p = MAPSIZE - 1;
+				ui8 q = Y + 1; if (q > (MAPSIZE - 1)) q = MAPSIZE - 1;
+				for (ui8 r = n; (r <= p) && !error; r++) {
+					for (ui8 s = m; (s <= q) && !error; s++) {
+						if ((*map)[r][s] == ship) {
+							error = true;
+						}
+					}
+				}
+				rndDir == horizontal ? X++ : Y++;
+			}
+			if (error) {
+				EXPECT_THROW(shipCreator->create(map, rndDir, rndX, rndY, rndLen[j]),
+					std::bad_alloc);
+			}
+			else {
+				ships[j] = shipCreator->create(map, rndDir, rndX, rndY, rndLen[j]);
+			}
+		}
+		for (ui8 j = 0; j < 2; j++) {
+			for (ui8 k = 0; k < rndLen[j]; k++) {
+				delete ships[j][k];
+			}
+			delete[] ships[j];
+		}
+		delete[] ships;
+		delete map;
+	}
+}
+
 #endif

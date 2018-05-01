@@ -80,6 +80,9 @@ TEST_F(ShipCreatorTest, ShipCreatorCreate2Test) {
 	for (ui8 i = 0; i < 100; i++) {
 		Map* map = new Map();
 		Ship*** ships = new Ship**[2];
+		for (ui8 j = 0; j < 2; j++) {
+			ships[j] = NULL;
+		}
 		ui8 rndLen[2];
 		for (ui8 j = 0; j < 2; j++) {
 			ui8 rndX = Random(10);
@@ -112,10 +115,12 @@ TEST_F(ShipCreatorTest, ShipCreatorCreate2Test) {
 			}
 		}
 		for (ui8 j = 0; j < 2; j++) {
-			for (ui8 k = 0; k < rndLen[j]; k++) {
-				delete ships[j][k];
+			if (ships[j]) {
+				for (ui8 k = 0; k < rndLen[j]; k++) {
+					delete ships[j][k];
+				}
+				delete[] ships[j];
 			}
-			delete[] ships[j];
 		}
 		delete[] ships;
 		delete map;

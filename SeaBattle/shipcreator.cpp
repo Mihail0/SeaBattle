@@ -1,7 +1,19 @@
 #include "shipcreator.h"
 
+/**
+* Creates ship at the target location on the map.
+* @param map - Map where ship will be allocated
+* @param direction - Turn of ship (horizontal - 0, vertical - 1)
+* @param x - x-coordinate of the first ship's point
+* @param y - y-coordinate of the first ship's point
+* @param length - Length of ship
+* @return Array of pointers to Ship's blocks.
+* @note Direction should be [0,1], another direction becomes vertical (1).
+* @note First point always is the top-left corner of ship.
+* @note Length of ship cannot be 0 and ship should be within the map. An error will occur otherwise.
+* @note Ship shouldn't collide with another ships. An error will occur otherwise.
+*/
 Ship** ShipCreator::create(Map* &map, const ui8 &direction, const ui8 &x, const ui8 &y, const ui8 &length) {
-	//todo method is not complete
 	if (!length) throw std::out_of_range("Array index is out of range");
 	Ship** ships = new Ship*[length];
 	for (ui8 i = 0; i < length; i++) {

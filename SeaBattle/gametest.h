@@ -22,4 +22,12 @@ TEST_F(GameTest, GameMapInitTest) {
 	ASSERT_TRUE(game->map != NULL);
 }
 
+TEST_F(GameTest, GameShipCreatorInitTest) {
+	ASSERT_TRUE(game->shipCreator != NULL);
+}
+
+TEST_F(GameTest, GameShipsInitTest) {
+	ASSERT_TRUE(game->ships != NULL);
+}
+
 #endif

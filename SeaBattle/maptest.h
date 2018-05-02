@@ -56,4 +56,19 @@ TEST_F(MapTest, MapFireAtXYTest) {
 	}
 }
 
+TEST_F(MapTest, MapFireAtMapTest) {
+	for (ui8 i = 0; i < 100; i++) {
+		Map* expectMap = new Map();
+		Map* actualMap = new Map();
+		EXPECT_EQ(*expectMap, *actualMap);
+		ui8 rndX = Random(9);
+		ui8 rndY = Random(9);
+		(*expectMap)[rndX][rndY] = bomb;
+		actualMap->fire(rndX, rndY);
+		EXPECT_EQ(*expectMap, *actualMap);
+		delete actualMap;
+		delete expectMap;
+	}
+}
+
 #endif

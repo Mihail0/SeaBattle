@@ -77,7 +77,6 @@ TEST_F(MapTest, MapFireAtShipTest) {
 	for (ui8 i = 0; i < 100; i++) {
 		Map* expectMap = new Map();
 		Map* actualMap = new Map();
-		Ship** expectShip = NULL;
 		Ship** actualShip = NULL;
 
 		//Initialization
@@ -96,10 +95,7 @@ TEST_F(MapTest, MapFireAtShipTest) {
 
 		//Expected
 		(*expectMap)[fireX][fireY] = bomb;
-		ui8* c = new ui8(); *c = shipL;
-		expectShip = new Ship*[shipL];
 		for (ui8 k = 0, X = shipX, Y = shipY; k < shipL; k++) {
-			expectShip[k] = new Ship(X, Y, c);
 			if (!(X == fireX && Y == fireY)) {
 				//Didn't hit
 				(*expectMap)[X][Y] = ship;
@@ -107,8 +103,6 @@ TEST_F(MapTest, MapFireAtShipTest) {
 			else {
 				//Hit
 				(*expectMap)[X][Y] = crash;
-				delete expectShip[k];
-				expectShip[k] = NULL;
 			}
 			shipD == horizontal ? X++ : Y++;
 		}
@@ -120,18 +114,12 @@ TEST_F(MapTest, MapFireAtShipTest) {
 
 		//Comparison
 		EXPECT_EQ((*expectMap), (*actualMap));
-		for (ui8 j = 0; j < shipL; j++) {
-			if (!expectShip[j]) EXPECT_TRUE(actualShip[j] == NULL);
-			else EXPECT_EQ((*expectShip[j]), (*actualShip[j]));
-		}
 
 		delete shipCreator;
 		for (ui8 j = 0; j < shipL; j++) {
 			delete actualShip[j];
-			delete expectShip[j];
 		}
 		delete[] actualShip;
-		delete[] expectShip;
 		delete actualMap;
 		delete expectMap;
 	}

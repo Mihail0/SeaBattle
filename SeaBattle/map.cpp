@@ -8,7 +8,16 @@
 */
 void Map::fire(const ui8 &x, const ui8 &y) {
 	if (x < 10 && y < 10) {
-		container[x][y] = bomb;
+		switch (container[x][y]) {
+		case water:
+			container[x][y] = bomb;
+			break;
+		case ship:
+			container[x][y] = crash;
+			break;
+		default:
+			break;
+		}
 	}
 	else {
 		throw std::out_of_range("Array index is out of range");

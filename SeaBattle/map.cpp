@@ -4,7 +4,7 @@
 * Fired at the target cell of map
 * @param x - x-coordinate of the target
 * @param y - y-coordinate of the target
-* @note x & y should be less than the mapsize
+* @note x & y should be within [0,9]
 */
 void Map::fire(const ui8 &x, const ui8 &y) {
 	if (x < 10 && y < 10) {
@@ -21,6 +21,27 @@ void Map::fire(const ui8 &x, const ui8 &y) {
 	}
 	else {
 		throw std::out_of_range("Array index is out of range");
+	}
+}
+
+/**
+* Fired at the target cell of map
+* @param x - x-coordinate of the target
+* @param y - y-coordinate of the target
+* @param ships - An 2d array of pointers to ships
+* @param lengths - An array of lengths
+* @note x & y should be within [0,9]
+* @note This function additionally destroy the ship that was hit
+*/
+void Map::fire(const ui8 &x, const ui8 &y, Ship*** &ships, ui8* &lengths) {
+	fire(x, y);
+	for (ui8 i = 0; i < MAXSHIPS; i++) {
+		for (ui8 j = 0; j < lengths[i]; j++) {
+			if ((x == ships[i][j]->x) && (y == ships[i][j]->y)) {
+				delete ships[i][j];
+				ships[i][j] = NULL;
+			}
+		}
 	}
 }
 

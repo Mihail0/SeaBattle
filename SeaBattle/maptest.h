@@ -2,7 +2,9 @@
 #define __MAPTEST
 
 #include "defs.h"
+#include "ship.h"
 #include "map.h"
+#include "shipcreator.h"
 
 class MapTest :
 	public testing::Test {
@@ -66,6 +68,70 @@ TEST_F(MapTest, MapFireAtMapTest) {
 		(*expectMap)[rndX][rndY] = bomb;
 		actualMap->fire(rndX, rndY);
 		EXPECT_EQ(*expectMap, *actualMap);
+		delete actualMap;
+		delete expectMap;
+	}
+}
+
+TEST_F(MapTest, MapFireAtShipTest) {
+	for (ui8 i = 0; i < 100; i++) {
+		Map* expectMap = new Map();
+		Map* actualMap = new Map();
+		Ship** expectShip = NULL;
+		Ship** actualShip = NULL;
+
+		//Initialization
+		//Fire coordinates
+		ui8 fireX = Random(10);
+		ui8 fireY = Random(10);
+
+		//Ship coordinates
+		ui8 shipX = Random(10);
+		ui8 shipY = Random(10);
+		ui8 shipD = Random(2);
+		ui8 shipL = 0;
+		shipD == horizontal ?
+			shipL = 1 + Random(10 - shipX) :
+			shipL = 1 + Random(10 - shipY) ;
+
+		//Expected
+		(*expectMap)[fireX][fireY] = bomb;
+		ui8* c = new ui8(); *c = shipL;
+		expectShip = new Ship*[shipL];
+		for (ui8 k = 0, X = shipX, Y = shipY; k < shipL; k++) {
+			expectShip[k] = new Ship(X, Y, c);
+			if (!(X == fireX && Y == fireY)) {
+				//Didn't hit
+				(*expectMap)[X][Y] = ship;
+			}
+			else {
+				//Hit
+				(*expectMap)[X][Y] = crash;
+				delete expectShip[k];
+				expectShip[k] = NULL;
+			}
+			shipD == horizontal ? X++ : Y++;
+		}
+
+		//Actual
+		ShipCreator* shipCreator = new ShipCreator();
+		actualShip = shipCreator->create(actualMap, shipD, shipX, shipY, shipL);
+		actualMap->fire(fireX, fireY);
+
+		//Comparison
+		EXPECT_EQ((*expectMap), (*actualMap));
+		for (ui8 j = 0; j < shipL; j++) {
+			if (!expectShip[j]) EXPECT_TRUE(actualShip[j] == NULL);
+			else EXPECT_EQ((*expectShip[j]), (*actualShip[j]));
+		}
+
+		delete shipCreator;
+		for (ui8 j = 0; j < shipL; j++) {
+			delete actualShip[j];
+			delete expectShip[j];
+		}
+		delete[] actualShip;
+		delete[] expectShip;
 		delete actualMap;
 		delete expectMap;
 	}

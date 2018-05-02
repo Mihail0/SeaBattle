@@ -8,9 +8,9 @@ class Ship {
 	friend class ShipCreator;
 private:
 protected:
-	ui8 x, y;
 	ui8* count;
 public:
+	ui8 x, y;
 	bool operator==(const Ship &) const;
 	bool operator!=(const Ship &) const;
 	Ship();

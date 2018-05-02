@@ -77,8 +77,14 @@ TEST_F(MapTest, MapFireAtShipTest) {
 	for (ui8 i = 0; i < 100; i++) {
 		Map* expectMap = new Map();
 		Map* actualMap = new Map();
-		Ship** expectShip = NULL;
-		Ship** actualShip = NULL;
+		Ship*** expectShips = new Ship**[MAXSHIPS];
+		Ship*** actualShips = new Ship**[MAXSHIPS];
+		ui8* lengths = new ui8[MAXSHIPS];
+		for (ui8 j = 0; j < MAXSHIPS; j++) {
+			expectShips[j] = NULL;
+			actualShips[j] = NULL;
+			lengths[j] = 0;
+		}
 
 		//Initialization
 		//Fire coordinates
@@ -89,17 +95,16 @@ TEST_F(MapTest, MapFireAtShipTest) {
 		ui8 shipX = Random(10);
 		ui8 shipY = Random(10);
 		ui8 shipD = Random(2);
-		ui8 shipL = 0;
 		shipD == horizontal ?
-			shipL = 1 + Random(10 - shipX) :
-			shipL = 1 + Random(10 - shipY) ;
+			lengths[0] = 1 + Random(10 - shipX) :
+			lengths[0] = 1 + Random(10 - shipY);
 
 		//Expected
 		(*expectMap)[fireX][fireY] = bomb;
-		ui8* c = new ui8(); *c = shipL;
-		expectShip = new Ship*[shipL];
-		for (ui8 k = 0, X = shipX, Y = shipY; k < shipL; k++) {
-			expectShip[k] = new Ship(X, Y, c);
+		ui8* c = new ui8(); *c = lengths[0];
+		expectShips[0] = new Ship*[*c];
+		for (ui8 k = 0, X = shipX, Y = shipY; k < *c; k++) {
+			expectShips[0][k] = new Ship(X, Y, c);
 			if (!(X == fireX && Y == fireY)) {
 				//Didn't hit
 				(*expectMap)[X][Y] = ship;
@@ -107,31 +112,39 @@ TEST_F(MapTest, MapFireAtShipTest) {
 			else {
 				//Hit
 				(*expectMap)[X][Y] = crash;
-				delete expectShip[k];
-				expectShip[k] = NULL;
+				delete expectShips[0][k];
+				expectShips[0][k] = NULL;
 			}
 			shipD == horizontal ? X++ : Y++;
 		}
 
 		//Actual
 		ShipCreator* shipCreator = new ShipCreator();
-		actualShip = shipCreator->create(actualMap, shipD, shipX, shipY, shipL);
-		actualMap->fire(fireX, fireY);
+		actualShips[0] = shipCreator->create(actualMap, shipD, shipX, shipY, lengths[0]);
+		actualMap->fire(fireX, fireY, actualShips, lengths);
 
 		//Comparison
 		EXPECT_EQ((*expectMap), (*actualMap));
-		for (ui8 j = 0; j < shipL; j++) {
-			if (!expectShip[j]) EXPECT_TRUE(actualShip[j] == NULL);
-			else EXPECT_EQ((*expectShip[j]), (*actualShip[j]));
+		for (ui8 j = 0; j < MAXSHIPS; j++) {
+			for (ui8 k = 0; k < lengths[j]; k++) {
+				if (!expectShips[j][k]) EXPECT_TRUE(actualShips[j][k] == NULL);
+				else EXPECT_EQ((*expectShips[j][k]), (*actualShips[j][k]));
+			}
 		}
 
+		//Cleansing
 		delete shipCreator;
-		for (ui8 j = 0; j < shipL; j++) {
-			delete actualShip[j];
-			delete expectShip[j];
+		for (ui8 j = 0; j < MAXSHIPS; j++) {
+			for (ui8 k = 0; k < lengths[j]; k++) {
+				delete actualShips[j][k];
+				delete expectShips[j][k];
+			}
+			delete[] actualShips[j];
+			delete[] expectShips[j];
 		}
-		delete[] actualShip;
-		delete[] expectShip;
+		delete[] lengths;
+		delete[] actualShips;
+		delete[] expectShips;
 		delete actualMap;
 		delete expectMap;
 	}

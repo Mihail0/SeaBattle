@@ -1,5 +1,13 @@
 #include "shipcreator.h"
 
+ShipCreatorTest::ShipCreatorTest() {
+	shipCreator = new ShipCreator();
+}
+
+ShipCreatorTest::~ShipCreatorTest() {
+	delete shipCreator;
+}
+
 /**
 * Creates ship at the target location on the map.
 * @param map - Map where ship will be allocated

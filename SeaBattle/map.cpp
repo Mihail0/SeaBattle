@@ -49,6 +49,7 @@ void Map::fire(const ui8 &x, const ui8 &y, Ship*** &ships, ui8* &lengths) {
 					delete[] ships[i];
 					ships[i] = NULL;
 					lengths[i] = 0;
+					explode(x, y);
 				}
 			}
 		}

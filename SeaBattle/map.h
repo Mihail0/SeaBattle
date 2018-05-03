@@ -9,6 +9,7 @@ class Map {
 private:
 protected:
 	Line* container;
+	virtual void explode(const ui8 &, const ui8 &);
 public:
 	virtual void fire(const ui8 &, const ui8 &);
 	virtual void fire(const ui8 &, const ui8 &, Ship*** &, ui8* &);

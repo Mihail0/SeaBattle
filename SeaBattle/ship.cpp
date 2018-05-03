@@ -1,5 +1,9 @@
 #include "ship.h"
 
+ui8 Ship::getCount() const {
+	return *count;
+}
+
 bool Ship::operator==(const Ship &ship) const {
 	if (x != ship.x) return false;
 	if (y != ship.y) return false;

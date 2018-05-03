@@ -3,6 +3,20 @@
 
 #include "defs.h"
 
+class ShipTest :
+	public testing::Test {
+private:
+protected:
+	Ship* ship;
+public:
+	ShipTest();
+	virtual ~ShipTest();
+};
+
+TEST_F(ShipTest, ShipCreationTest) {
+	ASSERT_TRUE(ship != NULL);
+}
+
 class Ship {
 	friend class ShipTest;
 	friend class ShipCreator;

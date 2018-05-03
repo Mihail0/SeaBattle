@@ -1,5 +1,13 @@
 #include "ship.h"
 
+ShipTest::ShipTest() {
+	ship = new Ship();
+}
+
+ShipTest::~ShipTest() {
+	delete ship;
+}
+
 ui8 Ship::getX() const {
 	return x;
 }

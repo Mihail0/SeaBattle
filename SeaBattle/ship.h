@@ -9,8 +9,10 @@ class Ship {
 private:
 protected:
 	ui8* count;
-public:
 	ui8 x, y;
+public:
+	ui8 getX() const;
+	ui8 getY() const;
 	ui8 getCount() const;
 	bool operator==(const Ship &) const;
 	bool operator!=(const Ship &) const;

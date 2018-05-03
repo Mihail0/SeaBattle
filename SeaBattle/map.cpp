@@ -93,7 +93,7 @@ void Map::fire(const ui8 &x, const ui8 &y, Ship*** &ships, ui8* &lengths) {
 	for (ui8 i = 0; i < MAXSHIPS; i++) {
 		for (ui8 j = 0; j < lengths[i]; j++) {
 			if (!ships[i][j]) continue;
-			if ((x == ships[i][j]->x) && (y == ships[i][j]->y)) {
+			if ((x == ships[i][j]->getX()) && (y == ships[i][j]->getY())) {
 				bool rem = false;
 				if (ships[i][j]->getCount() == 1) {
 					rem = true;

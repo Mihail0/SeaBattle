@@ -1,5 +1,13 @@
 #include "ship.h"
 
+ui8 Ship::getX() const {
+	return x;
+}
+
+ui8 Ship::getY() const {
+	return y;
+}
+
 ui8 Ship::getCount() const {
 	return *count;
 }

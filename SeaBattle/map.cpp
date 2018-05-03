@@ -1,5 +1,13 @@
 #include "map.h"
 
+MapTest::MapTest() {
+	map = new Map();
+}
+
+MapTest::~MapTest() {
+	delete map;
+}
+
 /**
 * Fired at the 3x3 around the target point
 * @param X - x-coordinate of the target point

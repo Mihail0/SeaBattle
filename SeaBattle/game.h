@@ -10,10 +10,10 @@ class Game {
 	friend class GameTest;
 private:
 protected:
-public:
 	Map* map;
 	Ship** ships;
 	ShipCreator* shipCreator;
+public:
 	Game();
 	virtual ~Game();
 };

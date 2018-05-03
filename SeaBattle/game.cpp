@@ -1,5 +1,13 @@
 #include "game.h"
 
+GameTest::GameTest() {
+	game = new Game();
+}
+
+GameTest::~GameTest() {
+	delete game;
+}
+
 Game::Game() {
 	map = new Map();
 	shipCreator = new ShipCreator();

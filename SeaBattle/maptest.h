@@ -88,8 +88,12 @@ TEST_F(MapTest, MapFireAtShipTest) {
 
 		//Initialization
 		//Fire coordinates
-		ui8 fireX = Random(10);
-		ui8 fireY = Random(10);
+		ui8* fireX = new ui8[TESTSHOOTS];
+		ui8* fireY = new ui8[TESTSHOOTS];
+		for (ui8 j = 0; j < TESTSHOOTS; j++) {
+			fireX[j] = Random(10);
+			fireY[j] = Random(10);
+		}
 
 		//Ship coordinates
 		ui8 shipX = Random(10);
@@ -100,12 +104,21 @@ TEST_F(MapTest, MapFireAtShipTest) {
 			lengths[0] = 1 + Random(10 - shipY);
 
 		//Expected
-		(*expectMap)[fireX][fireY] = bomb;
+		for (ui8 j = 0; j < TESTSHOOTS; j++) {
+			(*expectMap)[fireX[j]][fireY[j]] = bomb;
+		}
 		ui8* c = new ui8(); *c = lengths[0];
 		expectShips[0] = new Ship*[lengths[0]];
 		for (ui8 k = 0, X = shipX, Y = shipY; k < lengths[0]; k++) {
 			expectShips[0][k] = new Ship(X, Y, c);
-			if (!(X == fireX && Y == fireY)) {
+			bool cond = false;
+			for (ui8 j = 0; j < TESTSHOOTS; j++) {
+				if (X == fireX[j] && Y == fireY[j]) {
+					cond = true;
+					break;
+				}
+			}
+			if (!cond) {
 				//Didn't hit
 				(*expectMap)[X][Y] = ship;
 			}
@@ -121,7 +134,9 @@ TEST_F(MapTest, MapFireAtShipTest) {
 		//Actual
 		ShipCreator* shipCreator = new ShipCreator();
 		actualShips[0] = shipCreator->create(actualMap, shipD, shipX, shipY, lengths[0]);
-		actualMap->fire(fireX, fireY, actualShips, lengths);
+		for (ui8 j = 0; j < TESTSHOOTS; j++) {
+			actualMap->fire(fireX[j], fireY[j], actualShips, lengths);
+		}
 
 		//Comparison
 		EXPECT_EQ((*expectMap), (*actualMap));
@@ -134,6 +149,8 @@ TEST_F(MapTest, MapFireAtShipTest) {
 
 		//Cleansing
 		delete shipCreator;
+		delete[] fireX;
+		delete[] fireY;
 		for (ui8 j = 0; j < MAXSHIPS; j++) {
 			for (ui8 k = 0; k < lengths[j]; k++) {
 				delete actualShips[j][k];

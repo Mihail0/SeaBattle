@@ -1,5 +1,13 @@
 #include "line.h"
 
+LineTest::LineTest() {
+	line = new Line();
+}
+
+LineTest::~LineTest() {
+	delete line;
+}
+
 /**
 * Fired at the target cell of line
 * @param index - index of the target

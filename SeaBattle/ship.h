@@ -11,6 +11,7 @@ protected:
 	ui8* count;
 public:
 	ui8 x, y;
+	ui8 getCount() const;
 	bool operator==(const Ship &) const;
 	bool operator!=(const Ship &) const;
 	Ship();

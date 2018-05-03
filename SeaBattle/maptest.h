@@ -107,6 +107,7 @@ TEST_F(MapTest, MapFireAtShipTest) {
 		for (ui8 j = 0; j < TESTSHOOTS; j++) {
 			(*expectMap)[fireX[j]][fireY[j]] = bomb;
 		}
+		ui8 counter = lengths[0];
 		ui8* c = new ui8(); *c = lengths[0];
 		expectShips[0] = new Ship*[lengths[0]];
 		for (ui8 k = 0, X = shipX, Y = shipY; k < lengths[0]; k++) {
@@ -124,11 +125,31 @@ TEST_F(MapTest, MapFireAtShipTest) {
 			}
 			else {
 				//Hit
+				counter--;
 				(*expectMap)[X][Y] = crash;
 				delete expectShips[0][k];
 				expectShips[0][k] = NULL;
 			}
 			shipD == horizontal ? X++ : Y++;
+		}
+		if (!counter) {
+			for (ui8 x = 0; x < MAPSIZE; x++) {
+				for (ui8 y = 0; y < MAPSIZE; y++) {
+					if ((*expectMap)[x][y] == crash) {
+						ui8 n = 0; if (x) n = x - 1;
+						ui8 m = 0; if (y) m = y - 1;
+						ui8 p = x + 1; if (p > (MAPSIZE - 1)) p = MAPSIZE - 1;
+						ui8 q = y + 1; if (q > (MAPSIZE - 1)) q = MAPSIZE - 1;
+						for (ui8 r = n; r <= p; r++) {
+							for (ui8 s = m; s <= q; s++) {
+								if ((*expectMap)[r][s] == water) {
+									(*expectMap)[r][s] = bomb;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 
 		//Actual

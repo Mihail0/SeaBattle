@@ -43,11 +43,13 @@ void Map::explode(const ui8 &x, const ui8 &y) {
 	//Explosion
 	while (X < MAPSIZE) {
 		fireAround(X, Y);
+		if (X == MAPSIZE - 1) break;
 		if (container[X + 1][Y] != crash) break;
 		else X++;
 	}
 	while (Y < MAPSIZE) {
 		fireAround(X, Y);
+		if (Y == MAPSIZE - 1) break;
 		if (container[X][Y + 1] != crash) break;
 		else Y++;
 	}

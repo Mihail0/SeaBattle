@@ -1,10 +1,44 @@
 #include "map.h"
 
 /**
+* Fired at the points around the target ship
+* @param x - x-coordinate of the target ship
+* @param y - y-coordinate of the target ship
+* @note x & y should be within the MAPSIZE
+* @note point should be part of the ship
+*/
+void Map::explode(const ui8 &x, const ui8 &y) {
+	if (!(x < 10 && y < 10)) throw std::out_of_range("Array index is out of range");
+	if (container[x][y] != crash) throw std::bad_alloc();
+	//Searching for the first point of ship
+	ui8 X = x;
+	ui8 Y = y;
+	while (X) {
+		if (container[X - 1][Y] != crash) break;
+		else X--;
+	}
+	while (Y) {
+		if (container[X][Y - 1] != crash) break;
+		else Y--;
+	}
+	//Explosion
+	while (X < MAPSIZE) {
+		fireAround(X, Y);
+		if (container[X + 1][Y] != crash) break;
+		else X++;
+	}
+	while (Y < MAPSIZE) {
+		fireAround(X, Y);
+		if (container[X][Y + 1] != crash) break;
+		else Y++;
+	}
+}
+
+/**
 * Fired at the target cell of map
 * @param x - x-coordinate of the target
 * @param y - y-coordinate of the target
-* @note x & y should be within [0,9]
+* @note x & y should be within the MAPSIZE
 */
 void Map::fire(const ui8 &x, const ui8 &y) {
 	if (x < 10 && y < 10) {
@@ -30,7 +64,7 @@ void Map::fire(const ui8 &x, const ui8 &y) {
 * @param y - y-coordinate of the target
 * @param ships - An 2d array of pointers to ships
 * @param lengths - An array of lengths
-* @note x & y should be within [0,9]
+* @note x & y should be within the MAPSIZE
 * @note This function additionally destroy the ship that was hit
 */
 void Map::fire(const ui8 &x, const ui8 &y, Ship*** &ships, ui8* &lengths) {

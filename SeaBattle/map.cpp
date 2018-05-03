@@ -7,7 +7,7 @@
 * @note x & y should be within the MAPSIZE
 */
 void Map::fireAround(const ui8 &X, const ui8 &Y) {
-	if (!(X < 10 && Y < 10)) throw std::out_of_range("Array index is out of range");
+	if (!(X < MAPSIZE && Y < MAPSIZE)) throw std::out_of_range("Array index is out of range");
 	ui8 n = 0; if (X) n = X - 1;
 	ui8 m = 0; if (Y) m = Y - 1;
 	ui8 p = X + 1; if (p > (MAPSIZE - 1)) p = MAPSIZE - 1;
@@ -27,7 +27,7 @@ void Map::fireAround(const ui8 &X, const ui8 &Y) {
 * @note point should be part of the ship
 */
 void Map::explode(const ui8 &x, const ui8 &y) {
-	if (!(x < 10 && y < 10)) throw std::out_of_range("Array index is out of range");
+	if (!(x < MAPSIZE && y < MAPSIZE)) throw std::out_of_range("Array index is out of range");
 	if (container[x][y] != crash) throw std::bad_alloc();
 	//Searching for the first point of ship
 	ui8 X = x;
@@ -60,7 +60,7 @@ void Map::explode(const ui8 &x, const ui8 &y) {
 * @note x & y should be within the MAPSIZE
 */
 void Map::fire(const ui8 &x, const ui8 &y) {
-	if (x < 10 && y < 10) {
+	if (x < MAPSIZE && y < MAPSIZE) {
 		switch (container[x][y]) {
 		case water:
 			container[x][y] = bomb;

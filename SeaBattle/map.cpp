@@ -1,6 +1,25 @@
 #include "map.h"
 
 /**
+* Fired at the 3x3 around the target point
+* @param X - x-coordinate of the target point
+* @param Y - y-coordinate of the target point
+* @note x & y should be within the MAPSIZE
+*/
+void Map::fireAround(const ui8 &X, const ui8 &Y) {
+	if (!(X < 10 && Y < 10)) throw std::out_of_range("Array index is out of range");
+	ui8 n = 0; if (X) n = X - 1;
+	ui8 m = 0; if (Y) m = Y - 1;
+	ui8 p = X + 1; if (p > (MAPSIZE - 1)) p = MAPSIZE - 1;
+	ui8 q = Y + 1; if (q > (MAPSIZE - 1)) q = MAPSIZE - 1;
+	for (ui8 r = n; r <= p; r++) {
+		for (ui8 s = m; s <= q; s++) {
+			fire(r, s);
+		}
+	}
+}
+
+/**
 * Fired at the points around the target ship
 * @param x - x-coordinate of the target ship
 * @param y - y-coordinate of the target ship
